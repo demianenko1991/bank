@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
  * @property float $balance
  * @property boolean $state
  * @property int $user_id
- * @property int $pin
+ * @property string $pin
  * @property-read User $cardHolder
  * @property-read Collection|UserTransaction[] $transactions
  *

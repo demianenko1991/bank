@@ -14,7 +14,7 @@ class UserCardsPinAdded extends Migration
     public function up()
     {
         Schema::table('user_cards', function (Blueprint $table) {
-            $table->smallInteger('pin');
+            $table->string('pin');
         });
     }
 
