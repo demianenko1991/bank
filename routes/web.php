@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
+Route::prefix('account')->name('account.')->group(function () {
+    Route::get('/', [
+        'uses' => 'AccountController@profile',
+        'as' => 'profile',
+    ]);
 });
+
