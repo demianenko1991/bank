@@ -14,10 +14,21 @@
 Auth::routes();
 
 Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
-Route::prefix('account')->name('account.')->group(function () {
-    Route::get('/', [
-        'uses' => 'AccountController@profile',
-        'as' => 'profile',
-    ]);
-});
 
+Route::middleware('auth')->group(function () {
+    Route::prefix('account')->name('account.')->group(function () {
+        Route::get('/', [
+            'uses' => 'AccountController@profile',
+            'as' => 'profile',
+        ]);
+    });
+    Route::resource('cards', 'CardController')->only([
+        'show', 'index', 'store'
+    ]);
+    Route::patch('cards/block/{card}', 'CardController@block')
+        ->name('cards.block');
+    Route::patch('cards/replenish/{card}', 'CardController@replenish')
+        ->name('cards.replenish');
+    
+    Route::resource('transactions', 'TransactionController');
+});

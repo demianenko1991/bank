@@ -60,18 +60,36 @@ class User extends Authenticatable
     
     public function cards()
     {
-        return $this->hasMany(UserCard::class, 'user_id', 'id');
+        return $this
+            ->hasMany(UserCard::class, 'user_id', 'id')
+            ->latest();
     }
     
     public function transactions()
     {
-        return $this->hasManyThrough(
+        $query = $this->hasManyThrough(
             UserTransaction::class,
             UserCard::class,
             'user_id',
             'card_id',
             'id',
             'id'
-        );
+        )->latest();
+    
+        if (request()->query('card')) {
+            $query->where('card_id', request()->query('card'));
+        }
+        
+        return $query;
+    }
+    
+    public function getLastTransactions(int $limit = 5)
+    {
+        return $this->transactions()->with('card')->limit($limit)->get();
+    }
+    
+    public function getNewestCards(int $limit = 2)
+    {
+        return $this->cards()->limit($limit)->get();
     }
 }

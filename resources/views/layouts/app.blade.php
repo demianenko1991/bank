@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ env('APP_NAME') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() === 'cards.index' ? 'active' : '' }}" href="{{ route('cards.index') }}">Cards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() === 'transactions.index' ? 'active' : '' }}" href="{{ route('transactions.index') }}">Transactions</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,8 +78,26 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @if(session('successMessage'))
+                    <div class="alert alert-success">{{ session('successMessage') }}</div>
+                @endif
+                @if(session('errorMessage'))
+                    <div class="alert alert-danger">{{ session('errorMessage') }}</div>
+                @endif
+                @yield('content')
+            </div>
         </main>
     </div>
+
+    <script type="text/javascript">
+	    function showBlockOrNot(select) {
+		    if(select.value === "0") {
+			    document.getElementById('custom-number').style.display = "block";
+		    } else{
+			    document.getElementById('custom-number').style.display = "none";
+		    }
+	    }
+    </script>
 </body>
 </html>

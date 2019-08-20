@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property string $creation_date
  * @property float $amount
  * @property int $card_id
  * @property string $message
@@ -23,10 +24,30 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserTransaction extends Model
 {
-    protected $fillable = ['amount', 'from_card_id', 'to_card_id'];
+    protected $fillable = ['amount', 'card_id', 'message'];
     
     public function card()
     {
         return $this->belongsTo(UserCard::class, 'card_id', 'id');
+    }
+    
+    public function getCreationDateAttribute()
+    {
+        return $this->created_at->format('Y.m.d H:i');
+    }
+    
+    /**
+     * @param int $cardId
+     * @param int $amount
+     * @param string $message
+     * @return bool
+     */
+    public function makeTransaction(int $cardId, int $amount, string $message)
+    {
+        $this->card_id = $cardId;
+        $this->amount = $amount;
+        $this->message = $message;
+        
+        return $this->save();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Events\BalanceChangedEvent;
+use App\Http\Listeners\BalanceChangedListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -17,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        BalanceChangedEvent::class => [
+            BalanceChangedListener::class,
         ],
     ];
 
