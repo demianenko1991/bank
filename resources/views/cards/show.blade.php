@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     {!! Form::open(['route' => ['cards.block', 'id' => $card->id], 'method' => 'patch']) !!}
@@ -29,9 +29,6 @@
                     <div><strong>CVV</strong>: {{ $card->cvv }}</div>
                     <div><strong>Pin</strong>: {{ $card->pin }}</div>
                     <div><strong>Balance</strong>: {{ $card->balance }}$</div>
-
-                    @include('transactions.particles.list')
-                    <a href="{{ route('transactions.index', ['card' => $card->id]) }}" class="btn btn-sm">Все транзакции</a>
 
                     @if($card->blocked() === false)
                     <div>
@@ -57,6 +54,12 @@
                     </div>
                     @endif
                 </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                @include('transactions.particles.list')
+                <a href="{{ route('transactions.index', ['card' => $card->id]) }}" class="btn btn-sm">Все транзакции</a>
             </div>
         </div>
     </div>

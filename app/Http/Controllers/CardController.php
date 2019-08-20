@@ -23,7 +23,7 @@ class CardController extends Controller
         $user = Auth::user();
         return view('cards.index', [
             'user' => $user,
-            'cards' => $user->cards()->paginate(5),
+            'cards' => $user->cards()->paginate(10),
         ]);
     }
     
@@ -92,7 +92,7 @@ class CardController extends Controller
             abort(403, 'Access denied!');
         }
         $this->validate($request, [
-            'amount' => 'required|integer|min:1',
+            'amount' => 'required|integer|not_in:0|min:' . floor($card->balance),
             'pin' => 'required|integer|in:' . $card->pin,
         ]);
         if ($card->blocked()) {
@@ -100,7 +100,7 @@ class CardController extends Controller
         }
         $amount = $request->input('amount');
         if($card->replenish($amount)) {
-            event(new BalanceChangedEvent($card, $amount));
+            event(new BalanceChangedEvent($card, abs($amount), null, $amount > 0));
         }
         return redirect()->back();
     }

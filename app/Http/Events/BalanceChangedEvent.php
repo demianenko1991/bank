@@ -49,7 +49,10 @@ class BalanceChangedEvent
     public function getMessage(?UserCard $opponent, bool $replenish): string
     {
         if (is_null($opponent)) {
-            return 'Счет пополнен вручную';
+            if ($replenish === true) {
+                return 'Счет пополнен вручную';
+            }
+            return 'Ручное списание средств';
         }
         if ($replenish === true) {
             return "Перевод с карты $opponent->hidden_card_number ({$opponent->cardHolder->name})";

@@ -21,7 +21,7 @@
                 <div class="card-header">My transactions</div>
                 <div class="card-body">
                     @include('transactions.particles.list')
-                    {!! $transactions->links() !!}
+                    {!! $transactions->appends(request()->only('card'))->links() !!}
                     <a href="{{ route('transactions.create') }}" class="btn btn-sm btn-primary">Перевести деньги</a>
                 </div>
             </div>
