@@ -33,12 +33,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @auth
                         <li class="nav-item">
                             <a class="nav-link {{ Route::currentRouteName() === 'cards.index' ? 'active' : '' }}" href="{{ route('cards.index') }}">Cards</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::currentRouteName() === 'transactions.index' ? 'active' : '' }}" href="{{ route('transactions.index') }}">Transactions</a>
                         </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

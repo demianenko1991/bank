@@ -34,7 +34,7 @@ class BalanceChangedEvent
      * @param UserCard|null $opponent
      * @param bool $replenish
      */
-    public function __construct(UserCard $card, float $amount, ?UserCard $opponent = null, bool $replenish = false)
+    public function __construct(UserCard $card, float $amount, ?UserCard $opponent = null, bool $replenish = true)
     {
         $this->card = $card;
         $this->amount = $amount;

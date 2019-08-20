@@ -32,7 +32,7 @@
     @empty
         <tr>
             <td colspan="4" align="center">
-                У Вас нет созданных карт.
+                You do not have any cards.
             </td>
         </tr>
     @endforelse

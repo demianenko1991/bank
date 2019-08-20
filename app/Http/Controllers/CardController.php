@@ -92,7 +92,7 @@ class CardController extends Controller
             abort(403, 'Access denied!');
         }
         $this->validate($request, [
-            'amount' => 'required|integer|not_in:0|min:' . floor($card->balance),
+            'amount' => 'required|integer|not_in:0|min:-' . floor($card->balance),
             'pin' => 'required|integer|in:' . $card->pin,
         ]);
         if ($card->blocked()) {

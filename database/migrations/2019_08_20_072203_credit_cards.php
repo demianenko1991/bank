@@ -18,7 +18,7 @@ class CreditCards extends Migration
             $table->timestamps();
             $table->char('number', 16);
             $table->date('expires_at');
-            $table->smallInteger('cvv');
+            $table->char('cvv', 3);
             $table->decimal('balance', 12, 2)->default(0);
             $table->boolean('state')
                 ->default(1)

@@ -28,7 +28,7 @@
     @empty
         <tr>
             <td colspan="4" align="center">
-                У Вас еще нет транзакий.
+                You do not have any transactions.
             </td>
         </tr>
     @endforelse

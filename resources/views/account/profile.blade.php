@@ -22,8 +22,8 @@
                 <div class="card-header">Last transactions</div>
                 <div class="card-body">
                     @include('transactions.particles.list')
-                    <a href="{{ route('transactions.create') }}" class="btn btn-sm btn-primary">Перевести деньги</a>
-                    <a href="{{ route('transactions.index') }}" class="btn btn-sm">Все транзакции</a>
+                    <a href="{{ route('transactions.create') }}" class="btn btn-sm btn-primary">Transfer money</a>
+                    <a href="{{ route('transactions.index') }}" class="btn btn-sm">All transactions</a>
                 </div>
             </div>
         </div>

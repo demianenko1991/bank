@@ -11,11 +11,11 @@
             <div class="card">
                 <div class="card-header">
                     {!! Form::open(['route' => ['cards.block', 'id' => $card->id], 'method' => 'patch']) !!}
-                    <a href="{{ route('cards.index') }}" class="btn"><- Назад</a>
+                    <a href="{{ route('cards.index') }}" class="btn"><- Back</a>
                     @if($card->blocked())
-                        <button class="btn-sm btn-success btn-flat">Разблокировать</button>
+                        <button class="btn-sm btn-success btn-flat">Unblock</button>
                     @else
-                        <button class="btn-sm btn-warning btn-flat">Заблокировать</button>
+                        <button class="btn-sm btn-warning btn-flat">Block</button>
                     @endif
                     {!! Form::close() !!}
 
@@ -31,8 +31,8 @@
                     <div><strong>Balance</strong>: {{ $card->balance }}$</div>
 
                     @if($card->blocked() === false)
-                    <div>
-                        <h2>Пополнить счет</h2>
+                    <div class="mt-4">
+                        <h2>Replenish account</h2>
                         {!! Form::open(['route' => ['cards.replenish', 'id' => $card->id], 'method' => 'patch']) !!}
                         <div class="form-group">
                             {!! Form::label('pin', 'Pin') !!}
@@ -49,7 +49,7 @@
                             @enderror
                         </div>
 
-                        <button class="btn-sm btn-flat">Пополнить</button>
+                        <button class="btn-sm btn-flat">Replenish</button>
                         {!! Form::close() !!}
                     </div>
                     @endif
@@ -59,7 +59,7 @@
         <div class="col-md-6">
             <div class="card">
                 @include('transactions.particles.list')
-                <a href="{{ route('transactions.index', ['card' => $card->id]) }}" class="btn btn-sm">Все транзакции</a>
+                <a href="{{ route('transactions.index', ['card' => $card->id]) }}" class="btn btn-sm">All transactions</a>
             </div>
         </div>
     </div>

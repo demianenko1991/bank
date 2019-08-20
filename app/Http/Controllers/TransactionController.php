@@ -68,7 +68,7 @@ class TransactionController extends Controller
             ]);
         }
         // Check pin for correctness
-        if ($cardFrom->pin !== (int)$request->input('pin')) {
+        if ($cardFrom->pin !== $request->input('pin')) {
             throw ValidationException::withMessages([
                 'pin' => 'Pin is incorrect',
             ]);
@@ -117,7 +117,9 @@ class TransactionController extends Controller
         $user = Auth::user();
         return view('transactions.create', [
             'user' => $user,
-            'cardsDictionary' => $user->cards->mapWithKeys(function (UserCard $card) {
+            'cardsDictionary' => $user->cards->filter(function (UserCard $card) {
+                return $card->blocked() === false;
+            })->mapWithKeys(function (UserCard $card) {
                 return [$card->id => "$card->card_number ($card->balance$)"];
             })->toArray(),
         ]);

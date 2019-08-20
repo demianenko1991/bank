@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
  * @property string $number
  * @property-read string $card_number
  * @property-read string $hidden_card_number
- * @property int $cvv
+ * @property string $cvv
  * @property float $balance
  * @property int $state
  * @property int $user_id
