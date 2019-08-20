@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
  * @property float $balance
  * @property boolean $state
  * @property int $user_id
+ * @property int $pin
  * @property-read User $cardHolder
  * @property-read Collection|UserTransaction[] $transactions
  *
@@ -33,7 +34,7 @@ class UserCard extends Model
     const STATE_BLOCKED = 0;
     const STATE_ACTIVE = 1;
     
-    protected $fillable = ['number', 'expires_at', 'cvv', 'user_id'];
+    protected $fillable = ['number', 'expires_at', 'cvv', 'user_id', 'pin'];
     
     protected $dates = ['expires_at'];
     
